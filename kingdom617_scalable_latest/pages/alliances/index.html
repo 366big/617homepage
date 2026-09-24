@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alliances · Kingdom 617</title>
+<style>
+:root{
+  --bg:#050a0c;
+  --line:rgba(226,196,139,.28);
+  --gold:#e2c48b;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% 8%,rgba(35,52,55,.28),transparent 42%),
+    linear-gradient(180deg,#071013 0%,#030709 100%);
+  color:#eee;
+  font-family:Georgia,"Times New Roman",serif;
+}
+.nav{
+  position:sticky;
+  top:0;
+  z-index:20;
+  border-bottom:1px solid var(--line);
+  background:rgba(4,9,11,.92);
+  backdrop-filter:blur(14px);
+}
+.navin{
+  max-width:1500px;
+  min-height:72px;
+  margin:auto;
+  padding:0 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.brand{
+  color:#ead5a8;
+  text-decoration:none;
+  font-size:18px;
+  letter-spacing:4px;
+  white-space:nowrap;
+}
+.brand small{
+  display:block;
+  margin-top:4px;
+  font-size:7px;
+  letter-spacing:3px;
+  color:rgba(234,213,168,.55);
+}
+.links{
+  display:flex;
+  gap:28px;
+}
+.links a{
+  color:rgba(239,232,215,.72);
+  text-decoration:none;
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  transition:.25s ease;
+}
+.links a:hover,.links a.active{color:#f1d49a}
+main{
+  max-width:1500px;
+  margin:auto;
+  padding:70px 34px 100px;
+}
+.heading{
+  text-align:center;
+  margin-bottom:52px;
+}
+.eyebrow{
+  color:rgba(226,196,139,.62);
+  font-size:9px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  margin-bottom:13px;
+}
+h1{
+  margin:0;
+  color:#ead5a8;
+  font-size:clamp(34px,4vw,54px);
+  font-weight:400;
+  letter-spacing:8px;
+  text-transform:uppercase;
+}
+.rule{
+  width:90px;
+  height:1px;
+  margin:20px auto 0;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:26px;
+  align-items:start;
+}
+.card{
+  position:relative;
+  display:block;
+  overflow:hidden;
+  text-decoration:none;
+  border:1px solid rgba(226,196,139,.22);
+  background:#05090b;
+  box-shadow:0 18px 50px rgba(0,0,0,.48);
+  transition:transform .38s ease,box-shadow .38s ease,border-color .38s ease;
+}
+.card:nth-child(1){grid-column:1 / span 2}
+.card:nth-child(2){grid-column:3 / span 2}
+.card:nth-child(3){grid-column:5 / span 2}
+.card:nth-child(4){grid-column:1 / span 2}
+.card:nth-child(5){grid-column:3 / span 2}
+.card:nth-child(6){grid-column:5 / span 2}
+.card:nth-child(7){grid-column:2 / span 2}
+.card:nth-child(8){grid-column:4 / span 2}
+.card img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.card.placeholder{
+  aspect-ratio:2 / 3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(226,196,139,.06),transparent 40%),
+    linear-gradient(145deg,#0b1517,#05090b);
+  border:1px dashed rgba(226,196,139,.25);
+  cursor:default;
+}
+.card.placeholder::before{
+  content:"ALLIANCE 06";
+  color:rgba(226,196,139,.38);
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+.card.placeholder.a7::before{content:"ALLIANCE 07"}
+.card.placeholder.a8::before{content:"ALLIANCE 08"}
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent 70%,rgba(0,0,0,.12));
+  transition:.35s ease;
+}
+.card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(226,196,139,.62);
+  box-shadow:0 28px 65px rgba(0,0,0,.68),0 0 30px rgba(226,196,139,.08);
+}
+.card:hover::after{background:rgba(255,255,255,.025)}
+@media(max-width:1000px){
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .card:nth-child(n){grid-column:auto}
+  .card:nth-child(7),.card:nth-child(8){grid-column:auto;max-width:100%;margin:0}
+}
+@media(max-width:680px){
+  .navin{padding:14px 16px;flex-direction:column}
+  .links{gap:14px;flex-wrap:wrap;justify-content:center}
+  main{padding:42px 16px 70px}
+  .cards{grid-template-columns:1fr;gap:18px}
+  .card:nth-child(n){grid-column:auto;max-width:none;margin:0}
+}
+
+
+/* Alliance quick index */
+.alliance-index{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  margin:0 auto 38px;
+  padding:0 8px;
+}
+.alliance-index a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:78px;
+  height:36px;
+  padding:0 16px;
+  border:1px solid rgba(226,196,139,.28);
+  background:rgba(7,13,15,.72);
+  color:rgba(239,232,215,.78);
+  text-decoration:none;
+  font-size:10px;
+  letter-spacing:2px;
+  transition:.25s ease;
+}
+.alliance-index a:hover{
+  color:#f1d49a;
+  border-color:rgba(226,196,139,.7);
+  background:rgba(226,196,139,.07);
+  transform:translateY(-2px);
+}
+.card.anchor-highlight{
+  animation:allianceHighlight 1.2s ease;
+}
+@keyframes allianceHighlight{
+  0%,100%{box-shadow:0 18px 50px rgba(0,0,0,.48)}
+  35%{box-shadow:0 0 0 2px rgba(226,196,139,.8),0 0 38px rgba(226,196,139,.24),0 28px 65px rgba(0,0,0,.68)}
+}
+@media(max-width:680px){
+  .alliance-index{gap:8px;margin-bottom:28px}
+  .alliance-index a{min-width:68px;height:34px;padding:0 12px;font-size:9px}
+}
+
+/* Modal viewport fix: always keep the close button visible and allow scrolling */
+.modal-backdrop{
+  align-items:flex-start;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:20px;
+}
+.modal{
+  max-height:calc(100vh - 40px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.modal-inner{padding:34px 46px 46px}
+@media(max-width:650px){
+  .modal-backdrop{padding:10px}
+  .modal{max-height:calc(100vh - 20px)}
+  .modal-inner{padding:26px 18px 24px}
+}
+
+/* Alliance detail modal */
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+  background:rgba(1,5,7,.82);
+  backdrop-filter:blur(10px);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .35s ease, visibility .35s ease;
+}
+.modal-backdrop.open{
+  opacity:1;
+  visibility:visible;
+}
+.modal{
+  position:relative;
+  width:min(820px,94vw);
+  max-height:min(88vh,900px);
+  overflow:auto;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(226,196,139,.08),transparent 34%),
+    linear-gradient(145deg,#111b1d,#070d0f 58%,#0b1113);
+  border:1px solid rgba(226,196,139,.58);
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.8),
+    0 0 0 1px rgba(226,196,139,.08),
+    0 0 55px rgba(226,196,139,.08);
+  transform:translateY(24px) scale(.97);
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.modal-backdrop.open .modal{
+  transform:translateY(0) scale(1);
+}
+/* Modal corner marks removed */
+.modal-inner{
+  padding:42px 46px 46px;
+}
+.modal-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+  padding-bottom:24px;
+  border-bottom:1px solid rgba(226,196,139,.2);
+}
+.modal-kicker{
+  color:rgba(226,196,139,.62);
+  font-size:9px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  margin-bottom:9px;
+}
+.modal-title{
+  margin:0;
+  color:#f0d8a8;
+  font-size:clamp(32px,5vw,52px);
+  font-weight:400;
+  letter-spacing:7px;
+}
+.modal-close{
+  width:38px;
+  height:38px;
+  flex:0 0 auto;
+  border:1px solid rgba(226,196,139,.35);
+  background:rgba(255,255,255,.025);
+  color:#e9d4aa;
+  font-size:22px;
+  line-height:1;
+  cursor:pointer;
+  transition:.25s ease;
+}
+.modal-close:hover{
+  border-color:rgba(226,196,139,.8);
+  background:rgba(226,196,139,.08);
+  transform:rotate(90deg);
+}
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  margin-top:24px;
+  background:rgba(226,196,139,.13);
+  border:1px solid rgba(226,196,139,.13);
+}
+.info-item{
+  padding:20px 22px;
+  min-height:88px;
+  background:rgba(7,13,15,.92);
+}
+.info-item.full{grid-column:1 / -1}
+.info-label{
+  color:rgba(226,196,139,.62);
+  font-size:9px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  margin-bottom:9px;
+}
+.info-value{
+  color:rgba(245,239,226,.9);
+  font-size:14px;
+  line-height:1.65;
+  letter-spacing:.3px;
+}
+.info-value strong{
+  color:#e9d1a0;
+  font-weight:400;
+}
+.modal-footer{
+  margin-top:22px;
+  padding-top:18px;
+  border-top:1px solid rgba(226,196,139,.16);
+  color:rgba(226,196,139,.48);
+  font-size:8px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  text-align:center;
+}
+@media(max-width:650px){
+  .modal-backdrop{padding:14px}
+  .modal-inner{padding:34px 22px 28px}
+  .info-grid{grid-template-columns:1fr}
+  .info-item.full{grid-column:auto}
+  .modal-title{letter-spacing:5px}
+}
+
+.alliance-open{padding:0;appearance:none;color:inherit;font:inherit;cursor:pointer;text-align:left;width:100%;}
+</style>
+<link rel="stylesheet" href="../../css/global.css">
+<style id="nav-events-mobile-fix">
+@media(max-width:760px){
+  .nav-actions{min-width:0}
+  .links{display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .links::-webkit-scrollbar{display:none}
+  .links a{flex:0 0 auto}
+}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="navin">
+<a class="brand" href="../../home.html">617 <small>KINGDOM ARCHIVE</small></a>
+<div class="nav-actions"><div class="links">
+<a href="../../pages/kingdom/" data-i18n="kingdom">Kingdom</a>
+<a class="active" href="../../pages/alliances/" data-i18n="alliances">Alliances</a>
+<a href="../../pages/events/" data-i18n="events">Events</a>
+<a href="../../pages/rankings/" data-i18n="ranking">Ranking</a>
+<a href="../../pages/migration/" data-i18n="migration">Migration</a>
+</div><div class="lang"><select id="language" aria-label="Language"></select></div></div></nav>
+
+<main>
+  <header class="heading">
+    <div class="eyebrow" data-i18n="eyebrow">Kingdom 617 · Royal Archive</div>
+    <h1 data-i18n="title">Alliances</h1>
+    <div class="rule"></div>
+  </header>
+
+  <nav class="alliance-index" aria-label="Alliance quick navigation">
+    <a href="#alliance-CUZ">CUZ</a>
+    <a href="#alliance-SOL">SOL</a>
+    <a href="#alliance-SKI">SKI</a>
+    <a href="#alliance-SIN">SIN</a>
+    <a href="#alliance-VRT">VRT</a>
+    <a href="#alliance-dtH">dtH</a>
+    <a href="#alliance-TAS">TAS</a>
+    <a href="#alliance-PhA">PhA</a>
+  </nav>
+
+  <section class="cards" aria-label="Kingdom 617 Alliances">
+    <button class="card alliance-open" id="alliance-CUZ" type="button" data-alliance="CUZ"><img src="../../assets/images/CUZ.png" alt="CUZ"></button>
+    <button class="card alliance-open" id="alliance-SOL" type="button" data-alliance="SOL"><img src="../../assets/images/SOL.png" alt="SOL"></button>
+    <button class="card alliance-open" id="alliance-SKI" type="button" data-alliance="SKI"><img src="../../assets/images/SKI.png" alt="SKI"></button>
+    <button class="card alliance-open" id="alliance-SIN" type="button" data-alliance="SIN"><img src="../../assets/images/SIN.png" alt="SIN"></button>
+    <button class="card alliance-open" id="alliance-VRT" type="button" data-alliance="VRT"><img src="../../assets/images/VRT.png" alt="VRT"></button>
+    <button class="card alliance-open" id="alliance-dtH" type="button" data-alliance="dtH"><img src="../../assets/images/dtH.png" alt="dtH"></button>
+    <button class="card alliance-open" id="alliance-TAS" type="button" data-alliance="TAS"><img src="../../assets/images/TAS.png" alt="TAS"></button>
+    <button class="card alliance-open" id="alliance-PhA" type="button" data-alliance="PhA"><img src="../../assets/images/PhA.png" alt="PhA"></button>
+  </section>
+</main>
+<!-- Alliance information modal -->
+<div class="modal-backdrop" id="allianceModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-inner">
+      <div class="modal-top">
+        <div>
+          <div class="modal-kicker" data-i18n="modalKicker">Kingdom 617 · Alliance</div>
+          <h2 class="modal-title" id="modalTitle">SUN</h2>
+        </div>
+        <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-label" data-i18n="activity">⏰ Main Events / Activity Time</div>
+          <div class="info-value" id="modalActivity">—</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label" data-i18n="bear">🐻 Bear Trap</div>
+          <div class="info-value"><strong>1st Team:</strong> — &nbsp; · &nbsp; <strong>2nd Team:</strong> —</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label" data-i18n="swordland">⚔️ Swordland</div>
+          <div class="info-value"><strong>1st Team:</strong> — &nbsp; · &nbsp; <strong>2nd Team:</strong> —</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label" data-i18n="tri">🔺 Tri-Alliance</div>
+          <div class="info-value"><strong>1st Team:</strong> — &nbsp; · &nbsp; <strong>2nd Team:</strong> —</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label" data-i18n="mainLanguage">🌐 Main Language</div>
+          <div class="info-value" id="modalLanguage">—</div>
+        </div>
+
+        <div class="info-item full">
+          <div class="info-label" data-i18n="r5">💬 R5's Message</div>
+          <div class="info-value" id="modalMessage">—</div>
+        </div>
+
+        <div class="info-item full">
+          <div class="info-label" data-i18n="looking">👥 Who We're Looking For</div>
+          <div class="info-value" id="modalLooking">—</div>
+        </div>
+
+        <div class="info-item full">
+          <div class="info-label" data-i18n="introLabel">📖 Alliance Introduction</div>
+          <div class="info-value" id="modalIntro">Alliance introduction</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label" data-i18n="recruitment">Recruitment</div>
+          <div class="info-value" data-i18n="recruitmentText">Check the alliance page for current status</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label" data-i18n="contact">Contact</div>
+          <div class="info-value">Alliance Manager 이정</div>
+        </div>
+      </div>
+
+      <div class="modal-footer" data-i18n="footer">Kingdom 617 · Royal Archive</div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+const LANGS=[['en','English'],['ko','한국어'],['de','Deutsch'],['es','Español'],['fr','Français'],['ar','العربية'],['id','Bahasa Indonesia'],['zh-TW','繁體中文'],['zh-CN','简体中文'],['ja','日本語'],["tr","Türkçe"]];
+const T={"en":{"home":"Home","kingdom":"Kingdom","alliances":"Alliances","ranking":"Ranking","migration":"Migration","eyebrow":"Kingdom 617 · Royal Archive","title":"Alliances","modalKicker":"Kingdom 617 · Alliance","activity":"⏰ Main Events / Activity Time","bear":"🐻 Bear Trap","swordland":"⚔️ Swordland","tri":"🔺 Tri-Alliance","mainLanguage":"🌐 Main Language","r5":"💬 R5's Message","looking":"👥 Who We're Looking For","introLabel":"📖 Alliance Introduction","recruitment":"Recruitment","recruitmentText":"Check the alliance page for current status","contact":"Contact","footer":"Kingdom 617 · Royal Archive"},"ko":{"home":"홈","kingdom":"왕국 소개","alliances":"연맹","ranking":"랭킹","migration":"이민","eyebrow":"617 왕국 · 왕실 아카이브","title":"연맹","modalKicker":"617 왕국 · 연맹","activity":"⏰ 주요 활동 시간","bear":"🐻 곰 사냥","swordland":"⚔️ 소드랜드","tri":"🔺 삼연맹","mainLanguage":"🌐 주요 언어","r5":"💬 R5의 메시지","looking":"👥 모집 대상","introLabel":"📖 연맹 소개","recruitment":"모집","recruitmentText":"현재 모집 상태는 연맹 페이지에서 확인해주세요","contact":"연락처","footer":"617 왕국 · 왕실 아카이브"},"de":{"home":"Startseite","kingdom":"Königreich","alliances":"Allianzen","ranking":"Rangliste","migration":"Migration","eyebrow":"Kingdom 617 · Royal Archive","title":"Allianzen","modalKicker":"Königreich 617 · Allianz","activity":"⏰ Hauptaktivitäten / Aktivitätszeit","bear":"🐻 Bärenfalle","swordland":"⚔️ Swordland","tri":"🔺 Tri-Allianz","mainLanguage":"🌐 Hauptsprache","r5":"💬 Nachricht von R5","looking":"👥 Wen wir suchen","introLabel":"📖 Allianzvorstellung","recruitment":"Rekrutierung","recruitmentText":"Aktuellen Status auf der Allianzseite prüfen","contact":"Kontakt","footer":"Kingdom 617 · Royal Archive"},"es":{"home":"Inicio","kingdom":"Reino","alliances":"Alianzas","ranking":"Clasificación","migration":"Migración","eyebrow":"Kingdom 617 · Royal Archive","title":"Alianzas","modalKicker":"Reino 617 · Alianza","activity":"⏰ Eventos principales / Horario","bear":"🐻 Trampa del Oso","swordland":"⚔️ Swordland","tri":"🔺 Tri-Alianza","mainLanguage":"🌐 Idioma principal","r5":"💬 Mensaje del R5","looking":"👥 A quién buscamos","introLabel":"📖 Presentación de la alianza","recruitment":"Reclutamiento","recruitmentText":"Consulta el estado actual en la página de la alianza","contact":"Contacto","footer":"Kingdom 617 · Royal Archive"},"fr":{"home":"Accueil","kingdom":"Royaume","alliances":"Alliances","ranking":"Classement","migration":"Migration","eyebrow":"Kingdom 617 · Royal Archive","title":"Alliances","modalKicker":"Royaume 617 · Alliance","activity":"⏰ Événements principaux / Horaires","bear":"🐻 Piège à ours","swordland":"⚔️ Swordland","tri":"🔺 Tri-Alliance","mainLanguage":"🌐 Langue principale","r5":"💬 Message du R5","looking":"👥 Profils recherchés","introLabel":"📖 Présentation de l’alliance","recruitment":"Recrutement","recruitmentText":"Consultez la page de l’alliance pour le statut actuel","contact":"Contact","footer":"Kingdom 617 · Royal Archive"},"ar":{"home":"الرئيسية","kingdom":"المملكة","alliances":"التحالفات","ranking":"التصنيف","migration":"الهجرة","eyebrow":"Kingdom 617 · Royal Archive","title":"التحالفات","modalKicker":"المملكة 617 · التحالف","activity":"⏰ الأنشطة الرئيسية / الوقت","bear":"🐻 فخ الدب","swordland":"⚔️ Swordland","tri":"🔺 التحالف الثلاثي","mainLanguage":"🌐 اللغة الرئيسية","r5":"💬 رسالة R5","looking":"👥 من نبحث عنهم","introLabel":"📖 مقدمة التحالف","recruitment":"التجنيد","recruitmentText":"تحقق من حالة التجنيد الحالية في صفحة التحالف","contact":"التواصل","footer":"Kingdom 617 · Royal Archive"},"id":{"home":"Beranda","kingdom":"Kerajaan","alliances":"Aliansi","ranking":"Peringkat","migration":"Migrasi","eyebrow":"Kingdom 617 · Royal Archive","title":"Aliansi","modalKicker":"Kerajaan 617 · Aliansi","activity":"⏰ Acara Utama / Waktu Aktivitas","bear":"🐻 Bear Trap","swordland":"⚔️ Swordland","tri":"🔺 Tri-Aliansi","mainLanguage":"🌐 Bahasa Utama","r5":"💬 Pesan R5","looking":"👥 Yang Kami Cari","introLabel":"📖 Pengenalan Aliansi","recruitment":"Rekrutmen","recruitmentText":"Lihat status terbaru di halaman aliansi","contact":"Kontak","footer":"Kingdom 617 · Royal Archive"},"zh-TW":{"home":"首頁","kingdom":"王國介紹","alliances":"聯盟","ranking":"排行榜","migration":"移民","eyebrow":"Kingdom 617 · Royal Archive","title":"聯盟","modalKicker":"617王國 · 聯盟","activity":"⏰ 主要活動 / 活動時間","bear":"🐻 熊陷阱","swordland":"⚔️ Swordland","tri":"🔺 三聯盟","mainLanguage":"🌐 主要語言","r5":"💬 R5訊息","looking":"👥 招募對象","introLabel":"📖 聯盟介紹","recruitment":"招募","recruitmentText":"請查看聯盟頁面了解目前狀態","contact":"聯絡方式","footer":"Kingdom 617 · Royal Archive"},"zh-CN":{"home":"首页","kingdom":"王国介绍","alliances":"联盟","ranking":"排行榜","migration":"移民","eyebrow":"Kingdom 617 · Royal Archive","title":"联盟","modalKicker":"617王国 · 联盟","activity":"⏰ 主要活动 / 活动时间","bear":"🐻 熊陷阱","swordland":"⚔️ Swordland","tri":"🔺 三联盟","mainLanguage":"🌐 主要语言","r5":"💬 R5消息","looking":"👥 招募对象","introLabel":"📖 联盟介绍","recruitment":"招募","recruitmentText":"请查看联盟页面了解当前状态","contact":"联系方式","footer":"Kingdom 617 · Royal Archive"},"ja":{"home":"ホーム","kingdom":"王国紹介","alliances":"同盟","ranking":"ランキング","migration":"移民","eyebrow":"Kingdom 617 · Royal Archive","title":"同盟","modalKicker":"617王国 · 同盟","activity":"⏰ 主なイベント / 活動時間","bear":"🐻 ベアトラップ","swordland":"⚔️ Swordland","tri":"🔺 トライアライアンス","mainLanguage":"🌐 主な言語","r5":"💬 R5メッセージ","looking":"👥 募集対象","introLabel":"📖 同盟紹介","recruitment":"募集","recruitmentText":"現在の状況は同盟ページをご確認ください","contact":"連絡先","footer":"Kingdom 617 · Royal Archive"},"tr":{"home":"Ana Sayfa","kingdom":"Krallık","alliances":"İttifaklar","ranking":"Sıralama","migration":"Göç","eyebrow":"Krallık 617 · Kraliyet Arşivi","title":"İttifaklar","modalKicker":"Krallık 617 · İttifak","activity":"⏰ Ana Etkinlikler / Aktivite Saati","bear":"🐻 Ayı Tuzağı","swordland":"⚔️ Swordland","tri":"🔺 Üçlü İttifak","mainLanguage":"🌐 Ana Dil","r5":"💬 R5 Mesajı","looking":"👥 Aradığımız Oyuncular","introLabel":"📖 İttifak Tanıtımı","recruitment":"Katılım Durumu","recruitmentText":"Güncel katılım durumunu ittifak sayfasından kontrol edin.","contact":"İletişim","footer":"Krallık 617 · Royal Archive"}};
+const sel=document.getElementById('language');LANGS.forEach(([k,n])=>{const o=document.createElement('option');o.value=k;o.textContent=n;sel.appendChild(o)});
+function setLang(k){const t=T[k]||T.en;document.documentElement.lang=k;document.documentElement.dir=k==='ar'?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(e=>{if(t[e.dataset.i18n]!=null)e.textContent=t[e.dataset.i18n]});sel.value=k;localStorage.setItem('kingdom617_lang',k)}
+sel.onchange=()=>setLang(sel.value);setLang(localStorage.getItem('kingdom617_lang')||'en');
+</script>
+<script>
+(() => {
+  const modal = document.getElementById("allianceModal");
+  const closeBtn = document.getElementById("modalClose");
+  const title = document.getElementById("modalTitle");
+
+  const data = {
+    CUZ: { activity:"—", language:"—", message:"—", looking:"—", intro:"Alliance introduction" },
+    SOL: { activity:"—", language:"—", message:"—", looking:"—", intro:"Alliance introduction" },
+    SKI: { activity:"—", language:"—", message:"—", looking:"—", intro:"Alliance introduction" },
+    SIN: { activity:"—", language:"—", message:"—", looking:"—", intro:"Alliance introduction" },
+    VRT: { activity:"—", language:"—", message:"—", looking:"—", intro:"Alliance introduction" },
+    dtH: { activity:"—", language:"—", message:"—", looking:"—", intro:"Alliance introduction" },
+    TAS: { activity:"—", language:"—", message:"—", looking:"—", intro:"Alliance introduction" },
+    PhA: { activity:"—", language:"—", message:"—", looking:"—", intro:"Alliance introduction" }
+  };
+
+  function openAlliance(name){
+    const item = data[name] || data.CUZ;
+    title.textContent = name;
+    document.getElementById("modalActivity").textContent = item.activity;
+    document.getElementById("modalLanguage").textContent = item.language;
+    document.getElementById("modalMessage").textContent = item.message;
+    document.getElementById("modalLooking").textContent = item.looking;
+    document.getElementById("modalIntro").textContent = item.intro;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden","false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeAlliance(){
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden","true");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll(".alliance-open").forEach(card => {
+    card.addEventListener("click", () => openAlliance(card.dataset.alliance));
+  });
+
+  document.querySelectorAll(".alliance-index a").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute("href"));
+      if (!target) return;
+      target.scrollIntoView({ behavior:"smooth", block:"center" });
+      target.classList.remove("anchor-highlight");
+      void target.offsetWidth;
+      target.classList.add("anchor-highlight");
+    });
+  });
+  closeBtn.addEventListener("click", closeAlliance);
+  modal.addEventListener("click", e => { if(e.target === modal) closeAlliance(); });
+  document.addEventListener("keydown", e => { if(e.key === "Escape") closeAlliance(); });
+})();
+</script>
+
+<script src="../../js/global.js"></script>
+
+<script>
+const EVENTS_NAV_LABELS = {
+  en:"Events", ko:"이벤트", de:"Events", es:"Eventos", fr:"Événements",
+  ar:"الفعاليات", id:"Acara", "zh-TW":"活動", "zh-CN":"活动", ja:"イベント", tr:"Etkinlikler"
+};
+document.addEventListener("DOMContentLoaded",()=>{
+  const langSelect=document.getElementById("language");
+  const applyEventLabel=()=>{
+    const lang=langSelect?.value || localStorage.getItem("kingdom617_lang") || "en";
+    document.querySelectorAll('[data-i18n="events"]').forEach(el=>el.textContent=EVENTS_NAV_LABELS[lang]||EVENTS_NAV_LABELS.en);
+  };
+  langSelect?.addEventListener("change",()=>setTimeout(applyEventLabel,0));
+  setTimeout(applyEventLabel,0);
+});
+</script>
+
+</body>
+</html>

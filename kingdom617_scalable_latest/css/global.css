@@ -1,0 +1,229 @@
+/* Kingdom 617 — Global Royal Archive Cursor */
+@media (pointer:fine){
+  html,body,a,button,input,select,textarea{cursor:none!important}
+  .k617-cursor-dot,.k617-cursor-ring{
+    position:fixed;left:0;top:0;pointer-events:none;z-index:2147483647;
+    opacity:0;transform:translate3d(-100px,-100px,0);will-change:transform;
+  }
+  .k617-cursor-dot{
+    width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;
+    background:#e2c48b;
+    box-shadow:0 0 0 1px rgba(226,196,139,.45),0 0 12px rgba(226,196,139,.45);
+  }
+  .k617-cursor-ring{
+    width:25px;height:25px;margin:-12.5px 0 0 -12.5px;
+    border:1px solid rgba(226,196,139,.72);
+    transform-origin:center;
+    transition:width .18s ease,height .18s ease,margin .18s ease,
+      border-color .18s ease,background .18s ease,box-shadow .18s ease;
+  }
+  .k617-cursor-ring::before,.k617-cursor-ring::after{
+    content:"";position:absolute;left:50%;top:50%;
+    background:rgba(226,196,139,.58);transform:translate(-50%,-50%);
+  }
+  .k617-cursor-ring::before{width:1px;height:35px}
+  .k617-cursor-ring::after{width:35px;height:1px}
+  .k617-cursor-ring.is-hover{
+    width:38px;height:38px;margin:-19px 0 0 -19px;
+    border-color:rgba(226,196,139,.95);
+    background:rgba(226,196,139,.06);
+    box-shadow:0 0 22px rgba(226,196,139,.20);
+  }
+  .k617-cursor-ring.is-press{
+    width:20px;height:20px;margin:-10px 0 0 -10px;
+  }
+}
+@media (pointer:coarse){
+  .k617-cursor-dot,.k617-cursor-ring{display:none!important}
+}
+
+
+/* =========================================================
+   KINGDOM 617 — SHARED HEADER / RESPONSIVE NAVIGATION
+   One header geometry for every page.
+   ========================================================= */
+.nav{
+  position:sticky !important;
+  top:0 !important;
+  z-index:1000 !important;
+  width:100% !important;
+  background:rgba(7,16,21,.94) !important;
+  border-bottom:1px solid rgba(185,154,97,.28) !important;
+  backdrop-filter:blur(12px) !important;
+  -webkit-backdrop-filter:blur(12px) !important;
+}
+.navin{
+  width:100% !important;
+  max-width:1180px !important;
+  min-height:70px !important;
+  height:70px !important;
+  margin:0 auto !important;
+  padding:0 24px !important;
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:20px !important;
+}
+.navin .brand{
+  flex:0 0 auto !important;
+  display:block !important;
+  white-space:nowrap !important;
+  margin:0 !important;
+}
+.nav-actions{
+  margin-left:auto !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:22px !important;
+  min-width:0 !important;
+}
+.navin .links{
+  flex:0 0 auto !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:27px !important;
+  margin:0 !important;
+  white-space:nowrap !important;
+}
+.navin .links a{
+  flex:0 0 auto !important;
+  white-space:nowrap !important;
+}
+.navin .lang{
+  flex:0 0 auto !important;
+  margin:0 !important;
+}
+ .navin .lang select{
+  width:118px !important;
+  min-width:118px !important;
+  height:32px !important;
+  padding:7px 28px 7px 10px !important;
+  margin:0 !important;
+  box-sizing:border-box !important;
+  appearance:auto !important;
+  -webkit-appearance:auto !important;
+  background:#0b1519 !important;
+  color:#ddd4c2 !important;
+  border:1px solid rgba(185,154,97,.4) !important;
+  border-radius:0 !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:12px !important;
+  line-height:16px !important;
+  letter-spacing:.2px !important;
+  text-transform:none !important;
+  outline:none !important;
+  box-shadow:none !important;
+  cursor:none !important;
+}
+.navin .lang select:hover,
+.navin .lang select:focus{
+  border-color:rgba(185,154,97,.72) !important;
+  background:#0d191d !important;
+}
+.navin .lang select option{
+  background:#0b1519 !important;
+  color:#ddd4c2 !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+}
+
+/* Keep the header compact and usable on phones.
+   Brand stays left; menu becomes a single horizontal scroll row. */
+@media (max-width:760px){
+  .navin{
+    height:auto !important;
+    min-height:70px !important;
+    padding:10px 14px 9px !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) auto !important;
+    grid-template-rows:32px auto !important;
+    column-gap:12px !important;
+    row-gap:8px !important;
+    align-items:center !important;
+  }
+  .nav-actions{
+    display:contents !important;
+  }
+  .navin .brand{
+    grid-column:1 !important;
+    grid-row:1 !important;
+    font-size:16px !important;
+  }
+  .navin .links{
+    grid-column:1 / -1 !important;
+    grid-row:2 !important;
+    width:100% !important;
+    min-width:0 !important;
+    display:flex !important;
+    justify-content:flex-start !important;
+    gap:18px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    -webkit-overflow-scrolling:touch !important;
+    scrollbar-width:none !important;
+    padding:0 1px 2px !important;
+  }
+  .navin .links::-webkit-scrollbar{display:none !important}
+  .navin .links{
+    flex:0 0 auto !important;
+    justify-content:flex-start !important;
+    gap:18px !important;
+    white-space:nowrap !important;
+  }
+  .navin .links a{
+    font-size:9px !important;
+    letter-spacing:1.7px !important;
+    padding:5px 0 !important;
+  }
+  .navin .lang{
+    grid-column:2 !important;
+    grid-row:1 !important;
+    margin-left:auto !important;
+    align-self:center !important;
+  }
+  .navin .lang select{
+    width:104px !important;
+    min-width:104px !important;
+    height:30px !important;
+    padding:6px 24px 6px 9px !important;
+    font-size:11px !important;
+  }
+}
+
+
+/* ===== 617 FINAL HEADER / CURSOR CONSISTENCY ===== */
+.nav,
+.navin,
+.nav-actions,
+.navin .links,
+.navin .brand,
+.navin .lang {
+  box-sizing:border-box;
+}
+.nav { isolation:isolate; }
+@media (pointer:fine){
+  .nav a, .nav button, .nav select { cursor:none !important; }
+}
+@media (max-width:760px){
+  .nav { overflow:visible !important; }
+  .navin { overflow:visible !important; }
+}
+
+/* =========================================================
+   KINGDOM 617 — GLOBAL ROYAL ARCHIVE TYPOGRAPHY
+   Use the refined Georgia-style serif from the Alliances page
+   consistently across the entire site.
+   ========================================================= */
+html, body,
+body *,
+button, input, select, textarea {
+  font-family: Georgia, "Times New Roman", serif !important;
+}
+
+/* Preserve the archive's elegant letter spacing and readability. */
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

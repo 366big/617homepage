@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Events — Kingdom 617</title>
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/archive.css">
+<style>
+.events-page{min-height:calc(100vh - 74px);display:flex;align-items:center;justify-content:center;padding:60px 20px}
+.events-panel{width:min(760px,100%);text-align:center;padding:70px 30px;border:1px solid rgba(190,155,83,.38);background:rgba(6,13,15,.82);box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.events-kicker{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#b99a62;margin-bottom:18px}
+.events-title{font-family:Georgia,serif;font-size:clamp(42px,7vw,78px);letter-spacing:.08em;color:#eee1c5;margin:0 0 20px}
+.events-rule{width:80px;height:1px;background:#b99a62;margin:0 auto 28px}
+.events-message{font-family:Georgia,serif;font-size:clamp(18px,2.2vw,24px);line-height:1.8;color:#d8c8a6}
+.events-sub{margin-top:14px;color:#9e947f;font-size:13px;letter-spacing:.08em}
+@media(max-width:650px){.events-page{padding:34px 14px}.events-panel{padding:52px 18px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="navin">
+<a class="brand" href="../../home.html">617 <small>KINGDOM ARCHIVE</small></a>
+<div class="nav-actions"><div class="links">
+<a href="../kingdom/" data-i18n="kingdom">Kingdom</a>
+<a href="../alliances/" data-i18n="alliances">Alliances</a>
+<a class="active" href="./" data-i18n="events">Events</a>
+<a href="../rankings/" data-i18n="ranking">Ranking</a>
+<a href="../migration/" data-i18n="migration">Migration</a>
+</div><div class="lang"><select id="language" aria-label="Language"></select></div></div>
+</div></nav>
+
+<main class="events-page">
+<section class="events-panel">
+<div class="events-kicker" data-i18n="eyebrow">KINGDOM 617 · ROYAL ARCHIVE</div>
+<h1 class="events-title" data-i18n="title">EVENTS</h1>
+<div class="events-rule"></div>
+<div class="events-message" data-i18n="message">The Events section is currently under construction.</div>
+<div class="events-sub" data-i18n="sub">Please check back soon.</div>
+</section>
+</main>
+
+<script>
+const LANGS=[["en","English"],["ko","한국어"],["de","Deutsch"],["es","Español"],["fr","Français"],["ar","العربية"],["id","Bahasa Indonesia"],["zh-TW","繁體中文"],["zh-CN","简体中文"],["ja","日本語"],["tr","Türkçe"]];
+const T={
+en:{kingdom:"Kingdom",alliances:"Alliances",events:"Events",ranking:"Ranking",migration:"Migration",eyebrow:"KINGDOM 617 · ROYAL ARCHIVE",title:"EVENTS",message:"The Events section is currently under construction.",sub:"Please check back soon."},
+ko:{kingdom:"왕국",alliances:"연맹",events:"이벤트",ranking:"랭킹",migration:"이민",eyebrow:"KINGDOM 617 · ROYAL ARCHIVE",title:"이벤트",message:"이벤트 페이지는 현재 제작 중입니다.",sub:"조금만 기다려주세요."},
+de:{kingdom:"Königreich",alliances:"Allianzen",events:"Events",ranking:"Rangliste",migration:"Migration",eyebrow:"KINGDOM 617 · ROYAL ARCHIVE",title:"EVENTS",message:"Der Event-Bereich befindet sich derzeit im Aufbau.",sub:"Bitte schauen Sie bald wieder vorbei."},
+es:{kingdom:"Reino",alliances:"Alianzas",events:"Eventos",ranking:"Clasificación",migration:"Migración",eyebrow:"KINGDOM 617 · ROYAL ARCHIVE",title:"EVENTOS",message:"La sección de eventos está actualmente en construcción.",sub:"Vuelve pronto."},
+fr:{kingdom:"Royaume",alliances:"Alliances",events:"Événements",ranking:"Classement",migration:"Migration",eyebrow:"KINGDOM 617 · ROYAL ARCHIVE",title:"ÉVÉNEMENTS",message:"La section Événements est actuellement en construction.",sub:"Revenez bientôt."},
+ar:{kingdom:"المملكة",alliances:"التحالفات",events:"الفعاليات",ranking:"التصنيف",migration:"الهجرة",eyebrow:"KINGDOM 617 · ROYAL ARCHIVE",title:"الفعاليات",message:"قسم الفعاليات قيد الإنشاء حاليًا.",sub:"يرجى العودة قريبًا."},
+id:{kingdom:"Kerajaan",alliances:"Aliansi",events:"Acara",ranking:"Peringkat",migration:"Migrasi",eyebrow:"KINGDOM 617 · ROYAL ARCHIVE",title:"ACARA",message:"Bagian acara sedang dalam tahap pembuatan.",sub:"Silakan kembali lagi nanti."},
+"zh-TW":{kingdom:"王國",alliances:"聯盟",events:"活動",ranking:"排名",migration:"移民",eyebrow:"KINGDOM 617 · ROYAL ARCHIVE",title:"活動",message:"活動頁面目前正在製作中。",sub:"敬請期待。"},
+"zh-CN":{kingdom:"王国",alliances:"联盟",events:"活动",ranking:"排名",migration:"移民",eyebrow:"KINGDOM 617 · ROYAL ARCHIVE",title:"活动",message:"活动页面目前正在制作中。",sub:"敬请期待。"},
+ja:{kingdom:"王国",alliances:"同盟",events:"イベント",ranking:"ランキング",migration:"移民",eyebrow:"KINGDOM 617 · ROYAL ARCHIVE",title:"イベント",message:"イベントページは現在制作中です。",sub:"しばらくお待ちください。"},
+tr:{kingdom:"Krallık",alliances:"İttifaklar",events:"Etkinlikler",ranking:"Sıralama",migration:"Göç",eyebrow:"KINGDOM 617 · ROYAL ARCHIVE",title:"ETKİNLİKLER",message:"Etkinlikler bölümü şu anda yapım aşamasındadır.",sub:"Lütfen daha sonra tekrar kontrol edin."}
+};
+const sel=document.getElementById("language");
+LANGS.forEach(([v,n])=>{const o=document.createElement("option");o.value=v;o.textContent=n;sel.appendChild(o);});
+function applyLang(lang){
+  const d=T[lang]||T.en;
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(d[k]!=null)el.textContent=d[k];});
+  if(lang==="ar") document.body.dir="rtl"; else document.body.dir="ltr";
+  sel.value=lang;
+  localStorage.setItem("kingdom617_lang",lang);
+}
+const saved=localStorage.getItem("kingdom617_lang")||"en";
+sel.addEventListener("change",()=>applyLang(sel.value));
+applyLang(T[saved]?saved:"en");
+</script>
+<script src="../../js/global.js"></script>
+</body>
+</html>
