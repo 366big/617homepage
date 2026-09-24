@@ -13,6 +13,7 @@
   .links::-webkit-scrollbar{display:none}
   .links a{flex:0 0 auto}
 }
+@media(max-width:420px){.kvk-summary-card{padding:12px 11px}.kvk-summary-rate{font-size:23px}.kvk-history-table{min-width:570px}.kvk-history-table th,.kvk-history-table td{padding:9px 7px}.kvk-king{min-width:115px}.kvk-king img{width:28px;height:28px}.kvk-opponent{font-size:11px}}
 </style>
 <style id="kingdom-principles-style">
 .kingdom-intro{margin-top:28px}
@@ -62,8 +63,9 @@
 .kvk-king-name{font-weight:700}
 .kvk-king-role{display:block;font-size:11px;opacity:.7;margin-top:2px}
 .kvk-placeholder{border:1px dashed var(--line,#ddd);padding:28px;text-align:center;opacity:.55;font-size:13px}
-@media(max-width:760px){.kvk-summary{grid-template-columns:1fr}.kvk-summary-card{min-height:96px}.kvk-history-table{font-size:12px}.kvk-history-table th,.kvk-history-table td{padding:11px 10px}}
+@media(max-width:760px){.kvk-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}.kvk-summary-card{min-height:88px;padding:15px 16px}.kvk-summary-label{font-size:9px;letter-spacing:.12em}.kvk-summary-rate{font-size:27px;margin-bottom:6px}.kvk-summary-record{font-size:11px}.kvk-history-list{margin-top:16px}.kvk-history-table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.kvk-history-table{font-size:11px;min-width:600px}.kvk-history-table th,.kvk-history-table td{padding:10px 8px}.kvk-history-table th{font-size:9px;letter-spacing:.06em}.kvk-king{gap:7px;min-width:125px}.kvk-king img{width:30px;height:30px}.kvk-king-name{font-size:11px}.kvk-king-role{font-size:10px}.kvk-placeholder{padding:22px 14px}}
 @media(max-width:760px){.kingdom-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.principles-grid{grid-template-columns:1fr}.principle-card{min-height:0;padding:22px 19px}.principle-card p{font-size:13px}}
+@media(max-width:420px){.kvk-summary-card{padding:12px 11px}.kvk-summary-rate{font-size:23px}.kvk-history-table{min-width:570px}.kvk-history-table th,.kvk-history-table td{padding:9px 7px}.kvk-king{min-width:115px}.kvk-king img{width:28px;height:28px}.kvk-opponent{font-size:11px}}
 </style>
 </head>
 <body>
@@ -166,9 +168,6 @@ function renderKvkHistory(kvk, lang){
   const rows=Array.isArray(kvk?.history)?kvk.history:[];
   if(!rows.length){root.innerHTML=`<div class="kvk-placeholder">${escapeHtml(t.kvkNoRecords||'No KVK history available.')}</div>`;return;}
 
-  const currentSeason=Number(kvk?.season||0);
-  const currentOpponent=Number(kvk?.opponent_kid||0);
-
   // Exclude the current "Castle held" placeholder record (no opponent)
   // from the historical win-rate calculation. Held results are shown
   // separately and are not counted as wins or losses.
@@ -185,7 +184,6 @@ function renderKvkHistory(kvk, lang){
     <div class="kvk-summary-card"><div class="kvk-summary-label">Preparation Phase · Win Rate</div><div class="kvk-summary-rate">${prepRate}%</div><div class="kvk-summary-record"><span class="wins">${prepWins}W</span> — <span class="losses">${prepLosses}L</span></div></div>
     <div class="kvk-summary-card"><div class="kvk-summary-label">Battle Phase · Win Rate</div><div class="kvk-summary-rate">${battleRate}%</div><div class="kvk-summary-record"><span class="wins">${battleWins}W</span> — <span class="losses">${battleLosses}L</span></div></div>
   </div>`;
-  const meta=currentSeason?`<div class="kvk-history-meta"><div class="kvk-meta-card"><strong>KVK ${currentSeason}</strong><span>${escapeHtml(t.kvkSeason||'KVK Season')}</span></div><div class="kvk-meta-card"><strong>${rows.length}</strong><span>Records</span></div></div>`:'';
   const table=rows.map(row=>{
     const kingName=escapeHtml(row.nick_name||'—');
     const alliance=row.alliance_abbr?`[${escapeHtml(row.alliance_abbr)}] `:'';
@@ -196,7 +194,7 @@ function renderKvkHistory(kvk, lang){
     const castle=formatKvkStatus(row.castle);
     return `<tr><td>${escapeHtml(formatKvkDate(row.appointed_at))}</td><td><span class="kvk-opponent">K${escapeHtml(row.opponent_kid||'—')}</span></td><td><span class="kvk-status ${kvkStatusClass(row.prep)}">${escapeHtml(prep)}</span></td><td><span class="kvk-status ${kvkStatusClass(row.castle)}">${escapeHtml(castle)}</span></td><td><div class="kvk-king">${avatarHtml}<div><span class="kvk-king-name">${alliance}${kingName}</span><span class="kvk-king-role">${role}</span></div></div></td></tr>`;
   }).join('');
-  root.innerHTML=`${summary}${meta}<div class="kvk-history-table-wrap"><table class="kvk-history-table"><thead><tr><th>${escapeHtml(t.kvkDate||'Date')}</th><th>${escapeHtml(t.kvkOpponent||'Opponent')}</th><th>${escapeHtml(t.kvkPrep||'Prep')}</th><th>${escapeHtml(t.kvkCastle||'Castle')}</th><th>${escapeHtml(t.kvkKing||'King')}</th></tr></thead><tbody>${table}</tbody></table></div>`;
+  root.innerHTML=`${summary}<div class="kvk-history-table-wrap"><table class="kvk-history-table"><thead><tr><th>${escapeHtml(t.kvkDate||'Date')}</th><th>${escapeHtml(t.kvkOpponent||'Opponent')}</th><th>${escapeHtml(t.kvkPrep||'Prep')}</th><th>${escapeHtml(t.kvkCastle||'Castle')}</th><th>${escapeHtml(t.kvkKing||'King')}</th></tr></thead><tbody>${table}</tbody></table></div>`;
 }
 
 function formatPower(value){
