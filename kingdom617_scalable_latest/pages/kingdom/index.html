@@ -14,6 +14,48 @@
   .links a{flex:0 0 auto}
 }
 </style>
+<style id="kingdom-principles-style">
+.kingdom-intro{margin-top:28px}
+.kingdom-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:42px}
+.stat{border:1px solid var(--line,#ddd);background:rgba(255,255,255,.025);padding:22px 18px;display:flex;flex-direction:column;gap:6px}
+.stat strong{font-size:clamp(22px,3vw,34px);letter-spacing:.02em}
+.stat span{font-size:12px;opacity:.65;text-transform:uppercase;letter-spacing:.12em}
+.principles-head{margin:0 0 22px}
+.principles-head h2{margin:7px 0 8px;font-size:clamp(24px,4vw,38px);letter-spacing:-.02em}
+.principles-head p{max-width:760px;opacity:.72;line-height:1.7;margin:0}
+.principles-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.principle-card{position:relative;border:1px solid var(--line,#ddd);padding:25px 24px 24px;min-height:230px;background:rgba(255,255,255,.02)}
+.principle-card .num{font-size:11px;opacity:.45;letter-spacing:.12em}
+.principle-card .symbol{font-size:22px;margin:10px 0 12px}
+.principle-card h3{margin:0 0 12px;font-size:18px;letter-spacing:.03em}
+.principle-card p{margin:0;line-height:1.72;opacity:.72;font-size:14px}
+.kvk-history{margin-top:28px}
+.kvk-history h2{margin:7px 0 8px}
+.kvk-history>p{max-width:760px;line-height:1.7;opacity:.72}
+.kvk-history-list{margin-top:22px}
+.kvk-history-meta{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.kvk-history-meta .kvk-meta-card{border:1px solid var(--line,#ddd);padding:12px 15px;min-width:150px;background:rgba(255,255,255,.02)}
+.kvk-history-meta strong{display:block;font-size:18px;margin-bottom:4px}
+.kvk-history-meta span{font-size:11px;opacity:.6;text-transform:uppercase;letter-spacing:.1em}
+.kvk-history-table-wrap{overflow-x:auto;border:1px solid var(--line,#ddd)}
+.kvk-history-table{width:100%;border-collapse:collapse;min-width:720px;font-size:13px}
+.kvk-history-table th{padding:12px 13px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;opacity:.7;border-bottom:1px solid var(--line,#ddd);white-space:nowrap}
+.kvk-history-table td{padding:13px;border-bottom:1px solid var(--line,#ddd);vertical-align:middle;white-space:nowrap}
+.kvk-history-table tr:last-child td{border-bottom:0}
+.kvk-opponent{font-weight:700}
+.kvk-status{font-weight:700}
+.kvk-status.won{color:#00a86b}
+.kvk-status.lost{color:#e04b43}
+.kvk-status.held{color:#3867d6}
+.kvk-prep-score{display:block;font-size:11px;opacity:.72;margin-top:3px}
+.kvk-king{display:flex;align-items:center;gap:9px;min-width:150px}
+.kvk-king img{width:34px;height:34px;border-radius:50%;object-fit:cover}
+.kvk-king-name{font-weight:700}
+.kvk-king-role{display:block;font-size:11px;opacity:.7;margin-top:2px}
+.kvk-placeholder{border:1px dashed var(--line,#ddd);padding:28px;text-align:center;opacity:.55;font-size:13px}
+@media(max-width:760px){.kvk-history-table{font-size:12px}.kvk-history-table th,.kvk-history-table td{padding:11px 10px}}
+@media(max-width:760px){.kingdom-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.principles-grid{grid-template-columns:1fr}.principle-card{min-height:0;padding:22px 19px}.principle-card p{font-size:13px}}
+</style>
 </head>
 <body>
 <nav class="nav"><div class="navin">
@@ -28,17 +70,46 @@
 
 <main class="page">
 <section class="head">
-<div class="eyebrow" data-i18n="eyebrow">ROYAL ARCHIVE · THE REALM</div>
+<div class="eyebrow">ROYAL ARCHIVE · THE REALM</div>
 <h1 class="title" data-i18n="title">KINGDOM</h1>
 <p class="subtitle" data-i18n="subtitle">The central archive for Kingdom 617 — identity, history, rules, records and server information.</p>
 </section>
 
-<section class="grid"><article class="card"><div class="num">01</div><h3 data-i18n="card1t">Kingdom Profile</h3><p data-i18n="card1p">Server identity, creation information and the core story of Kingdom 617.</p></article><article class="card"><div class="num">02</div><h3 data-i18n="card2t">Rules & Diplomacy</h3><p data-i18n="card2p">Kingdom rules, NAP structure and diplomatic information.</p></article><article class="card"><div class="num">03</div><h3 data-i18n="card3t">Records</h3><p data-i18n="card3p">Historical records and future server achievements can be collected here.</p></article></section>
+<section class="kingdom-intro">
+  <div class="kingdom-stats">
+    <div class="stat"><strong>617</strong><span data-i18n="serverLabel">Server</span></div>
+    <div class="stat"><strong id="daysUnited">—</strong><span data-i18n="ageLabel">Age of Kingdom</span></div>
+    <div class="stat"><strong id="createdDate">12 Jul 2025</strong><span data-i18n="createdLabel">Created</span></div>
+    <div class="stat"><strong id="kingdomPower">—</strong><span data-i18n="powerLabel">Power</span></div>
+    <div class="stat"><strong id="governorCount">—</strong><span data-i18n="governorsLabel">Governors</span></div>
+    <div class="stat"><strong id="activePlayers">—</strong><span data-i18n="activeLabel">Active Players</span></div>
+    <div class="stat"><strong id="allianceCount">—</strong><span data-i18n="alliancesLabel">Alliances</span></div>
+  </div>
 
-<div class="panel">
-<h2 data-i18n="panelTitle">Kingdom 617</h2>
-<p data-i18n="panelText">This section is ready to receive the kingdom data, records, and future API integrations without changing the site structure.</p>
-</div>
+  <div class="principles-head">
+    <div class="eyebrow">KINGDOM PRINCIPLES</div>
+    <h2 data-i18n="principlesTitle">Unity · Balance · Teamwork · Peace</h2>
+    <p data-i18n="principlesLead">A kingdom built to compete together — without turning the battlefield against our own people.</p>
+  </div>
+
+  <div class="principles-grid">
+    <article class="principle-card"><div class="num">01</div><div class="symbol">⚔</div><h3 data-i18n="p1t">ONE KINGDOM</h3><p data-i18n="p1p">Server events are for everyone. All players are encouraged to participate in KVK, Dragon Empire and Internal Castle War as one kingdom. Rather than separating players by alliance strength, Server 617 aims to give every player a meaningful role when the server competes together.</p></article>
+    <article class="principle-card"><div class="num">02</div><div class="symbol">🛡</div><h3 data-i18n="p2t">PEACE WITHIN 617</h3><p data-i18n="p2p">No NAP is needed. City attacks inside Server 617 are prohibited, creating a clear and stable environment for every alliance. Players can grow, recruit and prepare for major events without worrying about being attacked by another alliance from the same server.</p></article>
+    <article class="principle-card"><div class="num">03</div><div class="symbol">⛏</div><h3 data-i18n="p3t">FAIR BATTLEFIELD</h3><p data-i18n="p3p">All-Out War is limited to resource-gathering sites. Cities remain protected, while controlled competition is still possible when players want to contribute to server activities. The goal is to keep internal competition from damaging the cooperation we need for major events.</p></article>
+    <article class="principle-card"><div class="num">04</div><div class="symbol">♟</div><h3 data-i18n="p4t">SHARED STRATEGY</h3><p data-i18n="p4p">Leaders from every alliance share strategy, battle plans and feedback before and after major server events. Important decisions are discussed across alliances so that experience from one group can be shared with the entire kingdom. Every event becomes an opportunity to improve together.</p></article>
+    <article class="principle-card"><div class="num">05</div><div class="symbol">◈</div><h3 data-i18n="p5t">ONE TEAM, DIFFERENT ALLIANCES</h3><p data-i18n="p5p">Alliances keep their own identity, members and leadership while working toward the same kingdom objective. Strength is coordinated, not concentrated. Different alliances can have different roles, but when Server 617 enters a major event, the focus is on what benefits the kingdom as a whole.</p></article>
+    <article class="principle-card"><div class="num">06</div><div class="symbol">✦</div><h3 data-i18n="p6t">ESTABLISHED</h3><p data-i18n="p6p">Founded on July 12, 2025. Since the beginning, Server 617 has been built around cooperation between alliances and a peaceful internal environment.</p></article>
+  </div>
+</section>
+
+<section class="kvk-history panel">
+  <div class="eyebrow">BATTLE RECORDS</div>
+  <h2 data-i18n="kvkTitle">KVK HISTORY</h2>
+  <p data-i18n="kvkLead">Historical KVK results and records.</p>
+  <div id="kvkHistoryList" class="kvk-history-list">
+    <div class="kvk-placeholder" data-i18n="kvkPlaceholder">Loading KVK records…</div>
+  </div>
+</section>
 </main>
 
 <footer>KINGDOM 617 · ROYAL ARCHIVE</footer>
@@ -51,6 +122,110 @@ sel.onchange=()=>setLang(sel.value);setLang(localStorage.getItem('kingdom617_lan
 </script>
 <script src="../../js/global.js"></script>
 
+<script id="kingdom-dynamic">
+const KINGDOM_TEXT={
+ en:{serverLabel:"Server",ageLabel:"Age of Kingdom",createdLabel:"Created",powerLabel:"Power",governorsLabel:"Governors",activeLabel:"Active Players",alliancesLabel:"Alliances",kvkDate:"Date",kvkOpponent:"Opponent",kvkPrep:"Prep",kvkCastle:"Castle",kvkKing:"King",kvkSeason:"KVK Season",kvkLoading:"Loading KVK records…",kvkNoRecords:"No KVK history available.",kvkError:"KVK history could not be loaded.",principlesTitle:"Unity · Balance · Teamwork · Peace",principlesLead:"A kingdom built to compete together — without turning the battlefield against our own people.",p1t:"ONE KINGDOM",p1p:"Server events are for everyone. All players are encouraged to participate in KVK, Dragon Empire and Internal Castle War as one kingdom. Rather than separating players by alliance strength, Server 617 aims to give every player a meaningful role when the server competes together.",p2t:"PEACE WITHIN 617",p2p:"No NAP is needed. City attacks inside Server 617 are prohibited, creating a clear and stable environment for every alliance. Players can grow, recruit and prepare for major events without worrying about being attacked by another alliance from the same server.",p3t:"FAIR BATTLEFIELD",p3p:"All-Out War is limited to resource-gathering sites. Cities remain protected, while controlled competition is still possible when players want to contribute to server activities. The goal is to keep internal competition from damaging the cooperation we need for major events.",p4t:"SHARED STRATEGY",p4p:"Leaders from every alliance share strategy, battle plans and feedback before and after major server events. Important decisions are discussed across alliances so that experience from one group can be shared with the entire kingdom. Every event becomes an opportunity to improve together.",p5t:"ONE TEAM, DIFFERENT ALLIANCES",p5p:"Alliances keep their own identity, members and leadership while working toward the same kingdom objective. Strength is coordinated, not concentrated. Different alliances can have different roles, but when Server 617 enters a major event, the focus is on what benefits the kingdom as a whole.",p6t:"ESTABLISHED",p6p:"Founded on July 12, 2025. Since the beginning, Server 617 has been built around cooperation between alliances and a peaceful internal environment.",kvkTitle:"KVK HISTORY",kvkLead:"Historical KVK results and records.",kvkPlaceholder:"KVK records."},
+ ko:{serverLabel:"서버",ageLabel:"왕국 연령",createdLabel:"생성일",powerLabel:"전투력",governorsLabel:"통치자",activeLabel:"활성 플레이어",alliancesLabel:"연맹 수",kvkDate:"날짜",kvkOpponent:"상대",kvkPrep:"준비전",kvkCastle:"캐슬",kvkKing:"왕",kvkSeason:"KVK 시즌",kvkLoading:"KVK 기록을 불러오는 중…",kvkNoRecords:"KVK 기록이 없습니다.",kvkError:"KVK 기록을 불러오지 못했습니다.",principlesTitle:"단결 · 균형 · 협력 · 평화",principlesLead:"우리 서버를 상대로 싸우는 것이 아니라, 함께 경쟁할 수 있는 왕국을 만듭니다.",p1t:"하나의 왕국",p1p:"서버 이벤트는 모든 플레이어를 위한 것입니다. KVK, Dragon Empire, 내부 캐슬전에서 하나의 왕국으로 함께 참여합니다. 연맹의 전투력에 따라 역할을 나누기보다, 서버가 함께 경쟁할 때 모든 플레이어가 의미 있는 역할을 가질 수 있도록 합니다.",p2t:"617 내부의 평화",p2p:"NAP은 필요하지 않습니다. 617 서버 내 도시 공격을 금지하여 모든 연맹이 안정적으로 성장하고 모집하며 주요 이벤트를 준비할 수 있는 환경을 유지합니다.",p3t:"공정한 전장",p3p:"All-Out War는 자원 채집지에서만 허용됩니다. 도시는 보호하면서도 서버 활동에 참여하고 싶은 플레이어들이 제한된 경쟁을 할 수 있도록 합니다. 내부 경쟁이 주요 이벤트에 필요한 협력을 해치지 않는 것이 목표입니다.",p4t:"공유하는 전략",p4p:"모든 연맹의 리더들은 주요 서버 이벤트 전후로 전략, 전투 계획과 피드백을 공유합니다. 중요한 결정은 연맹 간에 논의하고, 한 연맹의 경험을 왕국 전체가 활용할 수 있도록 합니다.",p5t:"하나의 팀, 서로 다른 연맹",p5p:"각 연맹은 자신만의 정체성, 구성원과 리더십을 유지하면서 같은 왕국의 목표를 향해 협력합니다. 힘은 한곳에 집중하는 것이 아니라 함께 조율합니다. 주요 이벤트에서는 왕국 전체에 도움이 되는 방향을 우선합니다.",p6t:"설립",p6p:"2025년 7월 12일 설립되었습니다. 시작부터 617 서버는 연맹 간 협력과 평화로운 내부 환경을 중심으로 운영되어 왔습니다.",kvkTitle:"역대 KVK 기록",kvkLead:"역대 KVK 결과와 기록을 확인할 수 있습니다.",kvkPlaceholder:"KVK 기록이 이곳에 표시됩니다."}
+};
+function applyKingdomText(lang){const t=KINGDOM_TEXT[lang]||KINGDOM_TEXT.en;document.querySelectorAll('[data-i18n]').forEach(e=>{if(t[e.dataset.i18n]!=null)e.textContent=t[e.dataset.i18n]});}
+function escapeHtml(value){
+  return String(value??'').replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+}
+function formatKvkDate(timestamp){
+  if(!Number.isFinite(Number(timestamp)) || Number(timestamp)<=0) return '—';
+  const d=new Date(Number(timestamp)*1000);
+  if(Number.isNaN(d.getTime())) return '—';
+  return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+}
+function kvkStatusClass(value){
+  const v=String(value||'').toLowerCase();
+  if(v==='won' || v==='conquered') return 'won';
+  if(v==='held' || v==='defended') return 'held';
+  return 'lost';
+}
+function formatKvkStatus(value){
+  const v=String(value||'').toLowerCase();
+  if(v==='won' || v==='conquered') return 'Won';
+  if(v==='held' || v==='defended') return 'Held';
+  if(v==='lost' || v==='castle_lost') return 'Lost';
+  return value || '—';
+}
+function renderKvkHistory(kvk, lang){
+  const root=document.getElementById('kvkHistoryList');
+  if(!root) return;
+  const t=KINGDOM_TEXT[lang]||KINGDOM_TEXT.en;
+  const rows=Array.isArray(kvk?.history)?kvk.history:[];
+  if(!rows.length){root.innerHTML=`<div class="kvk-placeholder">${escapeHtml(t.kvkNoRecords||'No KVK history available.')}</div>`;return;}
+
+  const currentSeason=Number(kvk?.season||0);
+  const currentOpponent=Number(kvk?.opponent_kid||0);
+  const meta=currentSeason?`<div class="kvk-history-meta"><div class="kvk-meta-card"><strong>KVK ${currentSeason}</strong><span>${escapeHtml(t.kvkSeason||'KVK Season')}</span></div><div class="kvk-meta-card"><strong>${currentOpponent?'K'+currentOpponent:'—'}</strong><span>${escapeHtml(t.kvkOpponent||'Opponent')}</span></div><div class="kvk-meta-card"><strong>${rows.length}</strong><span>Records</span></div></div>`:'';
+  const table=rows.map(row=>{
+    const kingName=escapeHtml(row.nick_name||'—');
+    const alliance=row.alliance_abbr?`[${escapeHtml(row.alliance_abbr)}] `:'';
+    const role=escapeHtml(row.role|| (row.high_king?'High King':'King'));
+    const avatar=row.avatar_url?`https://mightpulse.com${row.avatar_url}`:'';
+    const avatarHtml=avatar?`<img src="${escapeHtml(avatar)}" alt="" loading="lazy">`:'';
+    const prep=formatKvkStatus(row.prep);
+    const castle=formatKvkStatus(row.castle);
+    return `<tr><td>${escapeHtml(formatKvkDate(row.appointed_at))}</td><td><span class="kvk-opponent">K${escapeHtml(row.opponent_kid||'—')}</span></td><td><span class="kvk-status ${kvkStatusClass(row.prep)}">${escapeHtml(prep)}</span></td><td><span class="kvk-status ${kvkStatusClass(row.castle)}">${escapeHtml(castle)}</span></td><td><div class="kvk-king">${avatarHtml}<div><span class="kvk-king-name">${alliance}${kingName}</span><span class="kvk-king-role">${role}</span></div></div></td></tr>`;
+  }).join('');
+  root.innerHTML=`${meta}<div class="kvk-history-table-wrap"><table class="kvk-history-table"><thead><tr><th>${escapeHtml(t.kvkDate||'Date')}</th><th>${escapeHtml(t.kvkOpponent||'Opponent')}</th><th>${escapeHtml(t.kvkPrep||'Prep')}</th><th>${escapeHtml(t.kvkCastle||'Castle')}</th><th>${escapeHtml(t.kvkKing||'King')}</th></tr></thead><tbody>${table}</tbody></table></div>`;
+}
+
+function formatPower(value){
+  if(!Number.isFinite(value)) return "—";
+  if(value>=1e12) return (value/1e12).toFixed(2).replace(/\.00$/,'')+"T";
+  if(value>=1e9) return (value/1e9).toFixed(2).replace(/\.00$/,'')+"B";
+  if(value>=1e6) return (value/1e6).toFixed(2).replace(/\.00$/,'')+"M";
+  return Math.round(value).toLocaleString();
+}
+function formatCreatedDate(value){
+  if(!value) return "12 Jul 2025";
+  const d=new Date(value.includes('T')?value:value+'T00:00:00');
+  if(Number.isNaN(d.getTime())) return value;
+  return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+}
+function updateDaysFallback(){
+  const start=new Date('2025-07-12T00:00:00+09:00');
+  const days=Math.max(0,Math.floor((Date.now()-start.getTime())/86400000));
+  const el=document.getElementById('daysUnited');
+  if(el) el.textContent=days.toLocaleString();
+}
+async function loadKingdomData(){
+  updateDaysFallback();
+  try{
+    const response=await fetch('../../api/kingdom');
+    if(!response.ok) throw new Error('HTTP '+response.status);
+    const data=await response.json();
+    const age=document.getElementById('daysUnited');
+    const created=document.getElementById('createdDate');
+    const power=document.getElementById('kingdomPower');
+    const governors=document.getElementById('governorCount');
+    const active=document.getElementById('activePlayers');
+    const alliances=document.getElementById('allianceCount');
+    if(age) age.textContent=Number.isFinite(data.age_days)?data.age_days.toLocaleString():age.textContent;
+    if(created) created.textContent=formatCreatedDate(data.opened_on);
+    if(power) power.textContent=formatPower(data.power);
+    if(governors) governors.textContent=Number(data.player_count||0).toLocaleString();
+    if(active) active.textContent=Number(data.active_players||0).toLocaleString();
+    if(alliances) alliances.textContent=Number(data.alliance_count||0).toLocaleString();
+    window.__kingdom617Kvk=data.kvk||null;
+    renderKvkHistory(window.__kingdom617Kvk,localStorage.getItem('kingdom617_lang')||'en');
+  }catch(err){
+    console.warn('Kingdom data could not be loaded:',err);
+    const root=document.getElementById('kvkHistoryList');
+    const lang=localStorage.getItem('kingdom617_lang')||'en';
+    const t=KINGDOM_TEXT[lang]||KINGDOM_TEXT.en;
+    if(root) root.innerHTML=`<div class=\"kvk-placeholder\">${escapeHtml(t.kvkError||'KVK history could not be loaded.')}</div>`;
+  }
+}
+loadKingdomData();
+setInterval(loadKingdomData,1800000);
+const _originalSetLang=window.setLang;
+if(typeof _originalSetLang==='function'){window.setLang=function(k){_originalSetLang(k);applyKingdomText(k);if(window.__kingdom617Kvk)renderKvkHistory(window.__kingdom617Kvk,k)}}
+document.addEventListener('DOMContentLoaded',()=>applyKingdomText(localStorage.getItem('kingdom617_lang')||'en'));
+</script>
 <script>
 const EVENTS_NAV_LABELS = {
   en:"Events", ko:"이벤트", de:"Events", es:"Eventos", fr:"Événements",
