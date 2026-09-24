@@ -33,6 +33,15 @@
 .kvk-history h2{margin:7px 0 8px}
 .kvk-history>p{max-width:760px;line-height:1.7;opacity:.72}
 .kvk-history-list{margin-top:22px}
+.kvk-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 14px}
+.kvk-summary-card{position:relative;overflow:hidden;border:1px solid var(--line,#ddd);padding:18px 20px;background:linear-gradient(135deg,rgba(255,255,255,.035),rgba(255,255,255,.012));min-height:108px}
+.kvk-summary-card:after{content:"";position:absolute;right:-34px;bottom:-42px;width:110px;height:110px;border:1px solid rgba(255,255,255,.08);border-radius:50%}
+.kvk-summary-label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.62;margin-bottom:7px}
+.kvk-summary-rate{font-size:30px;line-height:1;font-weight:700;letter-spacing:-.02em;margin-bottom:7px}
+.kvk-summary-record{font-size:12px;letter-spacing:.04em;opacity:.72}
+.kvk-summary-record .wins{color:#00a86b;font-weight:700}
+.kvk-summary-record .losses{color:#e04b43;font-weight:700}
+.kvk-summary-record .held{color:#3867d6;font-weight:700}
 .kvk-history-meta{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 12px}
 .kvk-history-meta .kvk-meta-card{border:1px solid var(--line,#ddd);padding:12px 15px;min-width:150px;background:rgba(255,255,255,.02)}
 .kvk-history-meta strong{display:block;font-size:18px;margin-bottom:4px}
@@ -53,7 +62,7 @@
 .kvk-king-name{font-weight:700}
 .kvk-king-role{display:block;font-size:11px;opacity:.7;margin-top:2px}
 .kvk-placeholder{border:1px dashed var(--line,#ddd);padding:28px;text-align:center;opacity:.55;font-size:13px}
-@media(max-width:760px){.kvk-history-table{font-size:12px}.kvk-history-table th,.kvk-history-table td{padding:11px 10px}}
+@media(max-width:760px){.kvk-summary{grid-template-columns:1fr}.kvk-summary-card{min-height:96px}.kvk-history-table{font-size:12px}.kvk-history-table th,.kvk-history-table td{padding:11px 10px}}
 @media(max-width:760px){.kingdom-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.principles-grid{grid-template-columns:1fr}.principle-card{min-height:0;padding:22px 19px}.principle-card p{font-size:13px}}
 </style>
 </head>
@@ -159,7 +168,24 @@ function renderKvkHistory(kvk, lang){
 
   const currentSeason=Number(kvk?.season||0);
   const currentOpponent=Number(kvk?.opponent_kid||0);
-  const meta=currentSeason?`<div class="kvk-history-meta"><div class="kvk-meta-card"><strong>KVK ${currentSeason}</strong><span>${escapeHtml(t.kvkSeason||'KVK Season')}</span></div><div class="kvk-meta-card"><strong>${currentOpponent?'K'+currentOpponent:'—'}</strong><span>${escapeHtml(t.kvkOpponent||'Opponent')}</span></div><div class="kvk-meta-card"><strong>${rows.length}</strong><span>Records</span></div></div>`:'';
+
+  // Exclude the current "Castle held" placeholder record (no opponent)
+  // from the historical win-rate calculation. Held results are shown
+  // separately and are not counted as wins or losses.
+  const completed=rows.filter(row=>Number(row?.opponent_kid||0)>0);
+  const prepWins=completed.filter(row=>String(row?.prep||'').toLowerCase()==='won').length;
+  const prepLosses=completed.filter(row=>String(row?.prep||'').toLowerCase()==='lost').length;
+  const prepTotal=prepWins+prepLosses;
+  const prepRate=prepTotal?((prepWins/prepTotal)*100).toFixed(1):'0.0';
+  const battleWins=completed.filter(row=>['won','conquered','held','defended'].includes(String(row?.castle||'').toLowerCase())).length;
+  const battleLosses=completed.filter(row=>String(row?.castle||'').toLowerCase()==='lost').length;
+  const battleTotal=battleWins+battleLosses;
+  const battleRate=battleTotal?((battleWins/battleTotal)*100).toFixed(1):'0.0';
+  const summary=`<div class="kvk-summary">
+    <div class="kvk-summary-card"><div class="kvk-summary-label">Preparation Phase · Win Rate</div><div class="kvk-summary-rate">${prepRate}%</div><div class="kvk-summary-record"><span class="wins">${prepWins}W</span> — <span class="losses">${prepLosses}L</span></div></div>
+    <div class="kvk-summary-card"><div class="kvk-summary-label">Battle Phase · Win Rate</div><div class="kvk-summary-rate">${battleRate}%</div><div class="kvk-summary-record"><span class="wins">${battleWins}W</span> — <span class="losses">${battleLosses}L</span></div></div>
+  </div>`;
+  const meta=currentSeason?`<div class="kvk-history-meta"><div class="kvk-meta-card"><strong>KVK ${currentSeason}</strong><span>${escapeHtml(t.kvkSeason||'KVK Season')}</span></div><div class="kvk-meta-card"><strong>${rows.length}</strong><span>Records</span></div></div>`:'';
   const table=rows.map(row=>{
     const kingName=escapeHtml(row.nick_name||'—');
     const alliance=row.alliance_abbr?`[${escapeHtml(row.alliance_abbr)}] `:'';
@@ -170,7 +196,7 @@ function renderKvkHistory(kvk, lang){
     const castle=formatKvkStatus(row.castle);
     return `<tr><td>${escapeHtml(formatKvkDate(row.appointed_at))}</td><td><span class="kvk-opponent">K${escapeHtml(row.opponent_kid||'—')}</span></td><td><span class="kvk-status ${kvkStatusClass(row.prep)}">${escapeHtml(prep)}</span></td><td><span class="kvk-status ${kvkStatusClass(row.castle)}">${escapeHtml(castle)}</span></td><td><div class="kvk-king">${avatarHtml}<div><span class="kvk-king-name">${alliance}${kingName}</span><span class="kvk-king-role">${role}</span></div></div></td></tr>`;
   }).join('');
-  root.innerHTML=`${meta}<div class="kvk-history-table-wrap"><table class="kvk-history-table"><thead><tr><th>${escapeHtml(t.kvkDate||'Date')}</th><th>${escapeHtml(t.kvkOpponent||'Opponent')}</th><th>${escapeHtml(t.kvkPrep||'Prep')}</th><th>${escapeHtml(t.kvkCastle||'Castle')}</th><th>${escapeHtml(t.kvkKing||'King')}</th></tr></thead><tbody>${table}</tbody></table></div>`;
+  root.innerHTML=`${summary}${meta}<div class="kvk-history-table-wrap"><table class="kvk-history-table"><thead><tr><th>${escapeHtml(t.kvkDate||'Date')}</th><th>${escapeHtml(t.kvkOpponent||'Opponent')}</th><th>${escapeHtml(t.kvkPrep||'Prep')}</th><th>${escapeHtml(t.kvkCastle||'Castle')}</th><th>${escapeHtml(t.kvkKing||'King')}</th></tr></thead><tbody>${table}</tbody></table></div>`;
 }
 
 function formatPower(value){
